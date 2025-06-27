@@ -41,52 +41,7 @@ li button:hover {
   <button onclick="addTask()">Agregar</button>
   <ul id="task-list"></ul>
 
-<script>
-    window.addEventListener("load", () => {
-        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        tasks.forEach(task => renderTask(task));
-    });
-
-    function addTask() {
-        const input = document.getElementById("task-input");
-        const value = input.value.trim();
-        if (value !== "") {
-            renderTask(value);
-            saveTask(value);
-            input.value = "";
-        }
-    }
-
-    function renderTask(task) {
-        const list = document.getElementById("task-list");
-        const li = document.createElement("li");
-
-        // Usa textContent para evitar inyecciones de código malicioso
-        const span = document.createElement("span");
-        span.textContent = task;
-
-        const button = document.createElement("button");
-        button.textContent = "Eliminar";
-        button.onclick = () => removeTask(li, task);
-
-        li.appendChild(span);
-        li.appendChild(button);
-        list.appendChild(li);
-    }
-
-    function saveTask(task) {
-        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        tasks.push(task);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
-
-    function removeTask(element, task) {
-        element.remove();
-        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        tasks = tasks.filter(t => t !== task);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
-</script>
+<<script>window.addEventListener("load",()=>{const t=JSON.parse(localStorage.getItem("tasks"))||[];t.forEach(e=>renderTask(e))});function addTask(){const t=document.getElementById("task-input"),e=t.value.trim();""!==e&&(renderTask(e),saveTask(e),t.value="")}function renderTask(t){const e=document.getElementById("task-list"),n=document.createElement("li");n.innerHTML=`<span>${t}</span><button onclick="removeTask(this, '${t}')">Eliminar</button>`,e.appendChild(n)}function saveTask(t){const e=JSON.parse(localStorage.getItem("tasks"))||[];e.push(t),localStorage.setItem("tasks",JSON.stringify(e))}function removeTask(t,e){t.parentElement.remove();let n=JSON.parse(localStorage.getItem("tasks"))||[];n=n.filter(t=>t!==e),localStorage.setItem("tasks",JSON.stringify(n))}</script>
 
 
 </body>
